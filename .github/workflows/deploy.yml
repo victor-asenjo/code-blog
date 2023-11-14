@@ -1,39 +1,45 @@
-name: Deploy on Commit
+name: Deploy React web on Commit
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v3
       with:
         node-version: '14'
 
     - name: Install dependencies
       run: npm install
 
-    - name: Configure Git identity
+    - name: Build Atnire YAML
       run: |
-        git config --global user.email "victorasenj@gmail.com"
-        git config --global user.name "victor-asenjo"
+        cd atnire-yaml
+        npm install
+        npm run build
 
-    - name: Authenticate with GitHub
-      run: git remote rm origin
+    - name: Upload Atnire YAML to GitHub Pages
+      uses: actions/upload-artifact@v2
+      with:
+        name: atnire-yaml
+        path: atnire-yaml/dist
 
-    - name: Run deploy script
-      run: npm run deploy
-      env:
-        CI: true
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Confirmation
-      run: echo "🎉 The job was automatically triggered."
+    - name: Deploy Atnire YAML to GitHub Pages
+      uses: actions/deployment@v3
+      with:
+        repository: '${{ github.repository }}'
+        token: '${{ secrets.GITHUB_TOKEN }}'
+        ref: ${{ github.event.pull_request.head.sha || github.sha }}
+        targets: atnire-yaml
