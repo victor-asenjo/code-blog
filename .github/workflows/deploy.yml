@@ -1,0 +1,22 @@
+name: Deploy on Commit
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Puedes cambiar a otro sistema operativo si es necesario
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run deploy script
+      run: npm run deploy
+
+    - name: Confirmation
+      run: echo "🎉 The job was automatically triggered."
