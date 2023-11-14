@@ -26,9 +26,15 @@ jobs:
         git config --global user.email "victorasenj@gmail.com"
         git config --global user.name "victor-asenjo"
 
+    - name: Authenticate with GitHub
+      run: |
+        git remote add origin-with-token https://$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
+
     - name: Run deploy script
       run: npm run deploy
-
+      env:
+        CI: true
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Confirmation
       run: echo "🎉 The job was automatically triggered."
