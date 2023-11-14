@@ -29,11 +29,6 @@ jobs:
     - name: Authenticate with GitHub
       run: git remote rm origin
 
-    - name: Set remote origin URL
-      run: |
-        git remote add origin https://github.com/victor-asenjo/code-blog.git
-
-
     - name: Run deploy script
       run: npm run deploy
       env:
