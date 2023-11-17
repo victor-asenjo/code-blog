@@ -45,6 +45,7 @@ function renderMenuItem(item, isNested = false) {
       disablePadding
       onClick={() => navigate(path)}
       className={location.pathname === path ? classes.active : null}
+      sx={{ paddingLeft: isNested ? 2 : 0 }} // Adjust the indentation based on isNested
     >
       <ListItemButton>
         <ListItemIcon>{icon}</ListItemIcon>
@@ -66,6 +67,7 @@ function renderMenuItem(item, isNested = false) {
 
   return listItem;
 }
+
 
   const drawer = (
     <div>
