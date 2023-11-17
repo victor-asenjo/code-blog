@@ -17,9 +17,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { useLocation, useNavigate } from 'react-router-dom'
-import { AddCircleOutline, SubjectOutlined } from '@mui/icons-material';
 import { classes } from 'istanbul-lib-coverage';
 import routes from '../constantes/routes'
+import menuItem from '../constantes/menuItems'
 import { Routes, Route } from 'react-router-dom';
 
 
@@ -32,20 +32,6 @@ function ResponsiveDrawer(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  const menuItem = [
-    {
-        text: 'My notes',
-        icon: <SubjectOutlined color="secondary"></SubjectOutlined>,
-        path: '/'
-    },
-    {
-        text: 'Create notes',
-        icon: <AddCircleOutline color="secondary"></AddCircleOutline>,
-        path: '/create'
-    }
-
-  ]
 
   const navigate = useNavigate()
   const location = useLocation()
