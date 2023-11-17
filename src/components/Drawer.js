@@ -64,6 +64,7 @@ function ResponsiveDrawer(props) {
         onClick={() => navigate(path)}
         sx={{
           backgroundColor: location.pathname === path ? '#f0f0f0' : 'transparent',
+          marginLeft: `${16}px`, // Aumenta el sangrado según la profundidad
         }}
         className={location.pathname === path ? classes.active : null}
       >
