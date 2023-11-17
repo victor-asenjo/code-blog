@@ -18,9 +18,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { classes } from 'istanbul-lib-coverage';
-import routes from '../constantes/routes'
 import menuItem from '../constantes/menuItems'
-import { Routes, Route } from 'react-router-dom';
+import Content from '../components/Content'
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 
@@ -195,17 +194,9 @@ function ResponsiveDrawer(props) {
       >
         <Toolbar />
         
-         {/* Add a Route component to render the content based on the route */}
-         <Routes>
-          {routes.map((route) => (
-            <Route
-              key={route.path}
-              path={route.path}
-              element={route.element}
-            />
-          ))}
-        </Routes>        
-        <Outlet />
+         {/* Render the content of the selected route */}
+         
+        <Content/>    
 
       </Box>
       
