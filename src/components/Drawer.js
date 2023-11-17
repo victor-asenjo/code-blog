@@ -16,7 +16,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { classes } from 'istanbul-lib-coverage';
 import routes from '../constantes/routes'
 import menuItem from '../constantes/menuItems'
@@ -205,6 +205,8 @@ function ResponsiveDrawer(props) {
             />
           ))}
         </Routes>        
+        <Outlet />
+
       </Box>
       
     </Box>
