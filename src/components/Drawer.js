@@ -53,35 +53,35 @@ function ResponsiveDrawer(props) {
 
   function renderMenuItem(item, isNested = false) {
     const { text, icon, path, children } = item;
-
+  
     const listItem = (
       <ListItem
         key={path || text}
         disablePadding
         onClick={() => navigate(path)}
         className={location.pathname === path ? classes.active : null}
-        sx={{ paddingLeft: isNested ? 2 : 0 }}
       >
         <ListItemButton>
-          <ListItemIcon>{icon}</ListItemIcon>
           <ListItemText primary={text} />
+          <ListItemIcon sx={{ marginLeft: 'auto' }}>{icon}</ListItemIcon>
         </ListItemButton>
       </ListItem>
     );
-
+  
     if (children && children.length > 0) {
       const nestedListOpen = isNestedListOpen(path);
-
+  
       return (
         <React.Fragment key={path || text}>
           <ListItem
             disablePadding
             onClick={() => handleNestedListToggle(path)}
-            sx={{ paddingLeft: isNested ? 2 : 0 }}
           >
             <ListItemButton>
-              <ListItemIcon>{nestedListOpen ? <ExpandLess /> : <ExpandMore />}</ListItemIcon>
               <ListItemText primary={text} />
+              <ListItemIcon sx={{ marginLeft: 'auto' }}>
+                {nestedListOpen ? <ExpandLess /> : <ExpandMore />}
+              </ListItemIcon>
             </ListItemButton>
           </ListItem>
           <List component="div" disablePadding>
@@ -91,9 +91,10 @@ function ResponsiveDrawer(props) {
         </React.Fragment>
       );
     }
-
+  
     return listItem;
   }
+  
 
 
   const drawer = (
