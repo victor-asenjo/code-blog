@@ -41,11 +41,15 @@ function ResponsiveDrawer(props) {
   function handleNestedListToggle(itemPath) {
     setOpenItems((prevOpenItems) => {
       const isOpen = prevOpenItems.includes(itemPath);
-      return isOpen
-        ? prevOpenItems.filter((path) => path !== itemPath)
-        : [...prevOpenItems, itemPath];
+      if (isOpen) {
+        navigate(itemPath); // Navigate to the path when collapsing the nested list
+        return prevOpenItems.filter((path) => path !== itemPath);
+      } else {
+        return [...prevOpenItems, itemPath];
+      }
     });
   }
+  
 
   function isNestedListOpen(itemPath) {
     return openItems.includes(itemPath);
