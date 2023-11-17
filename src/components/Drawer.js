@@ -21,6 +21,7 @@ import { classes } from 'istanbul-lib-coverage';
 import routes from '../constantes/routes'
 import menuItem from '../constantes/menuItems'
 import { Routes, Route } from 'react-router-dom';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 
 const drawerWidth = 240;
@@ -33,40 +34,66 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  const navigate = useNavigate()
-const location = useLocation()
+  const [openItems, setOpenItems] = React.useState([]);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-function renderMenuItem(item, isNested = false) {
-  const { text, icon, path, children } = item;
-
-  const listItem = (
-    <ListItem
-      key={path || text}
-      disablePadding
-      onClick={() => navigate(path)}
-      className={location.pathname === path ? classes.active : null}
-      sx={{ paddingLeft: isNested ? 2 : 0 }} // Adjust the indentation based on isNested
-    >
-      <ListItemButton>
-        <ListItemIcon>{icon}</ListItemIcon>
-        <ListItemText primary={text} />
-      </ListItemButton>
-    </ListItem>
-  );
-
-  if (children && children.length > 0) {
-    return (
-      <React.Fragment key={path || text}>
-        {listItem}
-        <List component="div" disablePadding>
-          {children.map((child) => renderMenuItem(child, true))}
-        </List>
-      </React.Fragment>
-    );
+  function handleNestedListToggle(itemPath) {
+    setOpenItems((prevOpenItems) => {
+      const isOpen = prevOpenItems.includes(itemPath);
+      return isOpen
+        ? prevOpenItems.filter((path) => path !== itemPath)
+        : [...prevOpenItems, itemPath];
+    });
   }
 
-  return listItem;
-}
+  function isNestedListOpen(itemPath) {
+    return openItems.includes(itemPath);
+  }
+
+  function renderMenuItem(item, isNested = false) {
+    const { text, icon, path, children } = item;
+
+    const listItem = (
+      <ListItem
+        key={path || text}
+        disablePadding
+        onClick={() => navigate(path)}
+        className={location.pathname === path ? classes.active : null}
+        sx={{ paddingLeft: isNested ? 2 : 0 }}
+      >
+        <ListItemButton>
+          <ListItemIcon>{icon}</ListItemIcon>
+          <ListItemText primary={text} />
+        </ListItemButton>
+      </ListItem>
+    );
+
+    if (children && children.length > 0) {
+      const nestedListOpen = isNestedListOpen(path);
+
+      return (
+        <React.Fragment key={path || text}>
+          <ListItem
+            disablePadding
+            onClick={() => handleNestedListToggle(path)}
+            sx={{ paddingLeft: isNested ? 2 : 0 }}
+          >
+            <ListItemButton>
+              <ListItemIcon>{nestedListOpen ? <ExpandLess /> : <ExpandMore />}</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+          <List component="div" disablePadding>
+            {nestedListOpen &&
+              children.map((child) => renderMenuItem(child, true))}
+          </List>
+        </React.Fragment>
+      );
+    }
+
+    return listItem;
+  }
 
 
   const drawer = (
