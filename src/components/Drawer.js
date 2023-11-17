@@ -62,6 +62,9 @@ function ResponsiveDrawer(props) {
         key={path || text}
         disablePadding
         onClick={() => navigate(path)}
+        sx={{
+          backgroundColor: location.pathname === path ? '#f0f0f0' : 'transparent',
+        }}
         className={location.pathname === path ? classes.active : null}
       >
         <ListItemButton>
@@ -79,6 +82,10 @@ function ResponsiveDrawer(props) {
           <ListItem
             disablePadding
             onClick={() => handleNestedListToggle(path)}
+            sx={{
+              backgroundColor: location.pathname === path ? '#f0f0f0' : 'transparent',
+            }}
+            className={location.pathname === path ? classes.active : null}
           >
             <ListItemButton>
               <ListItemIcon sx={{ marginLeft: 'auto' }}>{icon}</ListItemIcon>
