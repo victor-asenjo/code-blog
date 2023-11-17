@@ -16,12 +16,11 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { classes } from 'istanbul-lib-coverage';
 import menuItem from '../constantes/menuItems'
 import Content from '../components/Content'
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-
 
 const drawerWidth = 240;
 
@@ -44,6 +43,7 @@ function ResponsiveDrawer(props) {
         navigate(itemPath); // Navigate to the path when collapsing the nested list
         return prevOpenItems.filter((path) => path !== itemPath);
       } else {
+        navigate(itemPath); // Navigate to the path when collapsing the nested list
         return [...prevOpenItems, itemPath];
       }
     });
