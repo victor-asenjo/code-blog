@@ -157,6 +157,17 @@ function ResponsiveDrawer(props) {
       >
         <Toolbar />
         
+         {/* Add a Route component to render the content based on the route */}
+         <Routes>
+          {routes.map((route) => (
+            <Route
+              key={route.path}
+              path={route.path}
+              element={route.element}
+            />
+          ))}
+        </Routes>
+
         <Typography paragraph>
           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
           eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
