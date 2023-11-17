@@ -34,7 +34,38 @@ function ResponsiveDrawer(props) {
   };
 
   const navigate = useNavigate()
-  const location = useLocation()
+const location = useLocation()
+
+function renderMenuItem(item, isNested = false) {
+  const { text, icon, path, children } = item;
+
+  const listItem = (
+    <ListItem
+      key={path || text}
+      disablePadding
+      onClick={() => navigate(path)}
+      className={location.pathname === path ? classes.active : null}
+    >
+      <ListItemButton>
+        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemText primary={text} />
+      </ListItemButton>
+    </ListItem>
+  );
+
+  if (children && children.length > 0) {
+    return (
+      <React.Fragment key={path || text}>
+        {listItem}
+        <List component="div" disablePadding>
+          {children.map((child) => renderMenuItem(child, true))}
+        </List>
+      </React.Fragment>
+    );
+  }
+
+  return listItem;
+}
 
   const drawer = (
     <div>
@@ -46,21 +77,7 @@ function ResponsiveDrawer(props) {
       <Toolbar />
       <Divider />
       <List>
-        {menuItem.map(item => (
-          <ListItem 
-          key={item.text} 
-          disablePadding
-          onClick={()=>navigate(item.path)}
-          className={location.pathname === item.path ? classes.active : null}
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+      {menuItem.map((item) => renderMenuItem(item))}
       </List>
       <Divider />
       <List>
