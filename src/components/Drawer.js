@@ -66,8 +66,8 @@ function ResponsiveDrawer(props) {
         className={location.pathname === path ? classes.active : null}
       >
         <ListItemButton>
-          <ListItemText primary={text} />
           <ListItemIcon sx={{ marginLeft: 'auto' }}>{icon}</ListItemIcon>
+          <ListItemText primary={text} />
         </ListItemButton>
       </ListItem>
     );
@@ -82,6 +82,7 @@ function ResponsiveDrawer(props) {
             onClick={() => handleNestedListToggle(path)}
           >
             <ListItemButton>
+              <ListItemIcon sx={{ marginLeft: 'auto' }}>{icon}</ListItemIcon>
               <ListItemText primary={text} />
               <ListItemIcon sx={{ marginLeft: 'auto' }}>
                 {nestedListOpen ? <ExpandLess /> : <ExpandMore />}
