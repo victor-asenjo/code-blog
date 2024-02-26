@@ -14,6 +14,7 @@ export default function Ias() {
         <li><a href="https://www.bing.com/" target="_blank" rel="noopener noreferrer">Explore the web with Bing</a> - Microsoft's powerful search engine at your fingertips.</li>
         <li><a href="https://mistral.ai/" target="_blank" rel="noopener noreferrer">Unleash innovation with Mistral</a> - Transforming businesses through AI-driven solutions.</li>
         <li><a href="https://llama.meta.com/" target="_blank" rel="noopener noreferrer">Experience Llama by Meta</a> - Navigate the metaverse with Meta's innovative platform.</li>
+        <li>https://learngitbranching.js.org/?locale=es_ES</li>
       </ul>
       
       <Content />  
