@@ -94,3 +94,6 @@ SHOTS.SO
 UNIVERSE.IO
 COLORS.CO
 
+
+# RESUME
+https://faangpath.com/template/
